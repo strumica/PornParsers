@@ -22,6 +22,9 @@ class movie:
         output += "Summary: {}\n".format(self.summary)
         output += "Tags: {}\n".format(self.tags)
         output += "Site: {}\n".format(self.site)
+        output += "Images: {}\n".format(self.images)
+        output += "Main Image: {}\n".format(self.mainImage)
+        
         return output
 
     def __str__(self):
@@ -33,4 +36,6 @@ class movie:
         output += "Summary: {}\n".format(self.summary)
         output += "Tags: {}\n".format(self.tags)
         output += "Site: {}\n".format(self.site)
+        output += "Images: {}\n".format(self.images)
+        output += "Main Image: {}\n".format(self.mainImage)
         return output
