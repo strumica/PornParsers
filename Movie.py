@@ -1,10 +1,12 @@
+from datetime import date
+
 class movie:
     """Represents a Video from a Porn Site"""
 
     def __init__(self,):
         self.title = ""
         self.actors = []
-        self.date = "" # This should eventually be a time field I think?
+        self.date = date(1, 1, 1) #"" # This should eventually be a time field I think?
         self.rating = 0
         self.summary = ""
         self.tags = []
