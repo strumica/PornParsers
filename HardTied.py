@@ -2,11 +2,10 @@ from lxml import html
 import requests
 from Movie import movie
 from datetime import date
-from dateutil.parser import *
+from dateutil.parser import parse
+import time
 
 # page to parse: 'http://www.hardtied.com/hogtied/bondage/gallery.php?type=full&page=&page=75'
-
-
 
 def parseHardtiedPage(url):
     page = requests.get(url)
@@ -77,8 +76,9 @@ def parseHardtiedPage(url):
 
 startURL = 'http://www.hardtied.com/hogtied/bondage/gallery.php?type=full&page=&page='
 startIndex = 1
-endIndex = 1
+endIndex = 2
 movies = []
 for x in range(startIndex,endIndex+1):
     movies += parseHardtiedPage(startURL+str(x))
+    time.sleep(8)
 print(movies)
