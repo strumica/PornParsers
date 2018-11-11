@@ -6,6 +6,15 @@ from dateutil.parser import parse
 import time
 
 # page to parse: 'http://www.hardtied.com/hogtied/bondage/gallery.php?type=full&page=&page=75'
+# Looks like this script with MINOR editing should work with:
+# http://www.hardtied.com
+# http://www.sensualpain.com
+# http://www.aganmedon.com
+# http://www.paintoy.com
+# http://www.sexuallybroken.com
+# http://www.topgrl.com
+# http://www.realtimebondage.com
+
 
 def parseHardtiedPage(url):
     page = requests.get(url)
