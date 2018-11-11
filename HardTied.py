@@ -66,7 +66,9 @@ def parseHardtiedPage(url):
                 # print(url)
                 vid.mainImage = url
             else:
-                vid.images.append(url)
+                fullSizeImage = x.getparent().get("href")
+                if "images" in fullSizeImage:
+                    vid.images.append(fullSizeImage)
             
         vid.site = siteURL
 
@@ -76,9 +78,14 @@ def parseHardtiedPage(url):
 
 startURL = 'http://www.hardtied.com/hogtied/bondage/gallery.php?type=full&page=&page='
 startIndex = 1
-endIndex = 2
+endIndex = 202
 movies = []
 for x in range(startIndex,endIndex+1):
-    movies += parseHardtiedPage(startURL+str(x))
+    eachSetOfMovies = parseHardtiedPage(startURL+str(x))
+    for eachMovie in eachSetOfMovies:
+        requests.get(eachMovie.createAddMovieUrl())
+    movies+= eachSetOfMovies
     time.sleep(8)
-print(movies)
+# print(movies)
+# for eachMovie in movies:
+#     requests.get(eachMovie.createAddMovieUrl())
