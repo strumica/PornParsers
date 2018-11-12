@@ -6,7 +6,7 @@ class movie:
     def __init__(self,):
         self.title = ""
         self.actors = []
-        self.date = date(1, 1, 1) #"" # This should eventually be a time field I think?
+        self.date = date(1, 1, 2) #Earliest date that works with django and python
         self.rating = 0
         self.summary = ""
         self.tags = []
@@ -20,6 +20,7 @@ class movie:
         # return str(self.title)
         output = "\n"
         output += "Title: {}\n".format(self.title)
+        output += "SiteID: {}\n".format(self.movieID)
         output += "Actors: {}\n".format(self.actors)
         output += "Date: {}\n".format(self.date)
         output += "Rating(0-10): {}\n".format(self.rating)
@@ -34,6 +35,7 @@ class movie:
     def __str__(self):
         output = "\n"
         output += "Title: {}\n".format(self.title)
+        output += "SiteID: {}\n".format(self.movieID)
         output += "Actors: {}\n".format(self.actors)
         output += "Date: {}\n".format(self.date)
         output += "Rating(0-10): {}\n".format(self.rating)
@@ -59,4 +61,6 @@ class movie:
             output += "&minorImage={}".format(img.replace("&", "%26"))
         if self.mainImage != "":
             output += "&mainImage={}".format(self.mainImage.replace("&", "%26"))
+        if self.movieID != "":
+            output += "&siteID={}".format(self.movieID.replace("&", "%26"))
         return output
