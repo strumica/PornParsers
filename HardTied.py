@@ -91,8 +91,8 @@ endIndex = 1
 movies = []
 for x in range(startIndex,endIndex+1):
     eachSetOfMovies = parseHardtiedPage(startURL+str(x))
-    # for eachMovie in eachSetOfMovies:
-    #     requests.get(eachMovie.createAddMovieUrl())
+    for eachMovie in eachSetOfMovies:
+        requests.get(eachMovie.createAddMovieUrl())
     movies+= eachSetOfMovies
     time.sleep(8)
 print(movies)
