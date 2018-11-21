@@ -18,14 +18,51 @@ def parseSocietySmPage(url):
     # allLinks = tree.xpath('//a')#/table[*]/tbody/tr/td/table[4]/tbody/tr/td[1]/a')
     
     allDateAndModels = tree.xpath('//*[@class="updatename"][@align="left"]')
-    print(allDateAndModels)
+    # print(allDateAndModels)
     for eachDateAndModel in allDateAndModels:
-        print(eachDateAndModel.text_content())
+        dateAndModelString = eachDateAndModel.text_content()
+        dateUnparsed, actorUnparsed = dateAndModelString.split(" - ")
+        print(dateUnparsed)
+        
+        actors = []
+        if "," in actorUnparsed:
+            actorsSplit = actorUnparsed.split(",")
+            for actor in actorsSplit:
+                actors.append(actor.strip())
+        else:
+            actors.append(actorUnparsed.strip())
+        print(actors)
+
         # up 4 parents
         FourUp = eachDateAndModel.getparent().getparent().getparent().getparent()
         # print(FourUp)
         par = FourUp.xpath('.//*[@class="p1"]')[0]
-        print(par.text_content())
+        summary = par.text_content()
+        print(summary)
+
+        hasMovieLink = False
+        movieUrl = ""
+        # Lets Find a link if it exists.
+        allLinks = FourUp.xpath('.//a')
+        for eachLink in allLinks:
+            movieUrl = eachLink.get("href")
+            if "http://www.societysm.com/updates" in movieUrl:
+                siteID = movieUrl.split("/")[-2]
+                print("{}".format(movieUrl))
+                print("{}".format(siteID))
+                hasMovieLink = True
+        
+        if hasMovieLink:
+            moviePage = requests.get(movieUrl)
+            movieTree = html.fromstring(moviePage.content)
+            titleTag = movieTree.xpath('//td[@class="heading"]')[0]
+            titleTagText = titleTag.text_content()
+            if 'Preview for "' in titleTagText:
+                movieTitle = titleTagText.split('Preview for "')[1].split('"')[0]
+                print(movieTitle)
+                # sleep(5)
+        
+        print("\n")
 
     # print(len(dateAndModel))
     # for link in allLinks: 
